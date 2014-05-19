@@ -1,37 +1,37 @@
-;; all element in x are atom
-(define atom?
-	(lambda (x)
-		(and (not (pair? x)) (not (null? x)))))
+;; helper for print with newline
+(define p 
+  (lambda (x)  
+    (newline)
+    (display x)))
 
-;; all atom
+;; atom is not pair and not null
+(define atom?
+  (lambda (x)
+    (and (not (pair? x)) (not (null? x)))))
+
+;; every element in lat is atom
 (define lat?
-	(lambda (x) 
-		(cond
-			((null? x) #t)
-			((atom? (car x))  (lat? (cdr x)))
-			(else #f))))
+  (lambda (x) 
+    (cond
+      ((null? x) #t)
+      ((atom? (car x))  (lat? (cdr x)))
+      (else #f))))
 
 ;; ele is a member of lat
 (define member? 
-	(lambda (ele lat)
-		(cond 
-			((null? lat) #f)
-			(else (or (eq? (car lat) ele) (member? ele (cdr lat)))))))
+  (lambda (ele lat)
+    (cond 
+      ((null? lat) #f)
+      (else (or (eq? (car lat) ele) (member? ele (cdr lat)))))))
 
 ;; remove member ele from lat
 (define remeber
-	(lambda (ele lat)
-		(cond
-			((null? lat) (quote ()))
-			(else (cond	
-				    ((eq? ele (car lat)) (cdr lat))
-					  (else (cons (car lat) (remeber ele (cdr lat)))))))))
-
-;; helper for print with newline
-(define p 
-	(lambda (x)  
-    (newline)
-		(display x)))
+  (lambda (ele lat)
+    (cond
+      ((null? lat) (quote ()))
+      (else (cond 
+         ((eq? ele (car lat)) (cdr lat))
+         (else (cons (car lat) (remeber ele (cdr lat)))))))))
 
 ;; better-version of rember
 (define remeber-revised
@@ -60,9 +60,6 @@
     (else (cons (car lat) (insert new old (cdr lat)))
   ))))
 
-(p (insert 'new 'old '(this is an nice old item and you should recv)))
-(p (insert 'new 'old '(this is an nice item and you should recv)))
-
 
 
 ;; replace in range
@@ -85,6 +82,9 @@
 (p (remeber-revised 'c '(a b c d e f g)))
 (p (firsts '((this is an item) (that is also an item) (and me is also an item))))
 (p (subst 'new 'old1 'old2 '(new this is an nice old1 and that is also old2)))
+(p (insert 'new 'old '(this is an nice old item and you should recv)))
+(p (insert 'new 'old '(this is an nice item and you should recv)))
+
 
 
 
