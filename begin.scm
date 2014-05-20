@@ -85,6 +85,16 @@
       (else (cons (car lat) (multirember ele (cdr lat)))))))
 
 
+;; multiinsert-r
+(define multiinsert-r
+  (lambda (new old lat)
+    (cond 
+      ((null? lat) '())
+      ((eq? old (car lat)) (cons old (cons new (multiinsert-r new old (cdr lat)))))
+      (else (cons (car lat) (multiinsert-r new old (cdr lat)))))))
+
+
+
 ;; begin main
 (p (lat? '(this is an nice 'item)))
 (p (lat? '(this is an nice item)))
@@ -98,6 +108,7 @@
 (p (insert 'new 'old '(this is an nice old item and you should recv)))
 (p (insert 'new 'old '(this is an nice item and you should recv)))
 (p (multirember 'nice '(this is an nice this is an nice nice nice)))
+(p (multiinsert-r 'new 'old '(this is an old and that is also an old and old)))
 
 
 
