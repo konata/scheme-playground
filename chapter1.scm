@@ -43,6 +43,26 @@
 (define (_loop) (_loop))
 
 
+;; exec 1.8
+(define (_cuberoot guess cube close improve)
+  (if (close guess cube) 
+    guess 
+    (_cuberoot (improve guess cube) cube close improve)
+  ))
+
+(define (cuberoot x) 
+  (_cuberoot 1.0 x 
+             ;; close predication
+             (lambda (guess cube) 
+               (< (/ (abs (- (* guess guess guess) cube)) cube) close-enough))
+                
+             ;; improve predication
+             (lambda (guess cube) 
+               (/ (+ (/ cube (square guess)) (* 2 guess)) 3)
+                )))
+
+
+
 
 ;; main 
 
@@ -51,8 +71,9 @@
 (p (if (> 2 1) 100 (_loop)))
 
 ;; pass as quote to escape default evaluation rule
-(p (_if (> 2 3) '100 '(_loop)))
+; (p (_if (> 2 3) '100 '(_loop)))
 
+(p (cuberoot 0.0000000000000000009))
 
 
 
