@@ -34,13 +34,14 @@
     (sr (improve guess x) x close-fn)
    ))
 
-;; how to invoke list as default evaluation ?
+
+
 (define (_if _pred _then _else)
   (cond 
-  (_pred _then)
+  (_pred then)
   (else _else)))
 
-(define (_loop) (_loop))
+(define (p) (p))
 
 
 
@@ -48,10 +49,6 @@
 
 (p (sr 1.0 0.0000000001 close?))
 (p (sr 1.0 0.0000000001 fac-close?))
-(p (if (> 2 1) 100 (_loop)))
-
-;; pass as quote to escape default evaluation rule
-(p (_if (> 2 3) '100 '(_loop)))
 
 
 
