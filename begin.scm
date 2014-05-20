@@ -72,8 +72,7 @@
     (cond
       ((null? lat) '())
       ((or (eq? (car lat) old1) (eq? (car lat) old2)) (cons new (cdr lat)))
-      (else (cons (car lat) (subst new old1 old2 (cdr lat))))
-      )))
+      (else (cons (car lat) (subst new old1 old2 (cdr lat)))))))
 
 
 ;; multirember 
