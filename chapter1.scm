@@ -6,6 +6,12 @@
     (display x) 
     (newline)))
 
+;; current page
+(define progress 
+  (lambda ()
+  "p40"))
+
+
 ;; close threshold
 (define close-enough 0.0001)
 
@@ -62,6 +68,19 @@
                 )))
 
 
+;; chapter 1.2
+(define (fac-recursive) 
+  (lambda (n)
+    (if (= n 1) 1 (* n (fac (- n 1)))
+    )))
+
+(define (fac n)
+  (define (fact-iter product counter max-count)
+    (if (> counter max-count) product (fact-iter (* product counter) (+ 1 counter) max-count)))
+  (fact-iter 1 1 n)
+  )
+
+
 
 
 ;; main 
@@ -71,9 +90,17 @@
 (p (if (> 2 1) 100 (_loop)))
 
 ;; pass as quote to escape default evaluation rule
-; (p (_if (> 2 3) '100 '(_loop)))
+;  (p (_if (> 2 3) '100 '(_loop)))
 
 (p (cuberoot 0.0000000000000000009))
+(p (progress))
+
+(p (/ (fac 100) (fac 99)))
+
+
+
+
+
 
 
 
