@@ -5,6 +5,17 @@
 
 (define (page) 54)
 
+
+(define (fast-expt b n)
+  (cond 
+    ((= n 0) 1)
+    ((even? n) (square (fast-expt b (/ n 2))))
+    (else (*b (fast-expt b (- n 1))))))
+
+(define (even? n)
+  (= (remainder n 2) 0))
+
+
 ;; Q1.11
 ;; f(n) = f(n-1) + 2f(n-2) + 3f(n-3) f(n) = n if n < 3
 ;; recursion version
@@ -34,7 +45,94 @@
 
 (p (pascal 3 5))
 
-;; Q1.13
+;; Q1.17
+(define (* a b)
+  (if (= b 0) 0 (+ a (* a (- b 1))))
+  )
+
+(p (* 10 9))
+
+
+;; Q1.17 log complexity
+(begin 
+  ;; double
+  (define (double x)
+    ;(* x 2))
+    (+ x x))
+    
+  ;; even number prediction
+  (define (even? n)
+    (= (remainder n 2) 0))
+    
+  ;; half
+  (define (halve x)
+    (/ x 2))
+  
+  (define (* a b)
+    (cond 
+      ((= 1 a) b)
+      ((even? a) (double (* (halve a) b)))
+      (else (+ b (* (- a 1) b)))))
+  
+  (p (* 10 9)))
+
+
+
+;; Q1.19
+(begin
+(define (gcd a b)
+  (if (= b 0)
+    a (gcd b (remainder a b))))
+(p (gcd 100 30))
+)
+
+;; smallest divisor
+(begin
+  (define (div? a b)
+    (= (remainder b a) 0))
+  (define (div n guess)
+    (cond 
+      ((> (square guess) n) n)
+      ((div? guess n) guess)
+      (else (div n (+ guess 1)))
+    )
+  )
+  (define (sdiv m)
+    (div m 2))
+
+  (p (sdiv 199))
+  (p (sdiv 1999))
+  (p (sdiv 19999))
+)
+
+
+;; Q1.30
+(begin
+  (define (sum term a next b)
+    (if (> a b) 0 (+ (term a) (sum term (next a) next b))))
+  (define (term x)
+    (* x x))
+  (define (next x)
+    (+ 1 x))
+  (p (sum term 1 next 10)))
+
+
+(begin 
+  (define (sum term a next b result)
+    (if (> a b) result 
+      (sum term (next a) next b (+ result (term a)))))
+    (define (term x)
+      (* x x))
+    (define (next x)
+      (+ 1 x))
+    (p (sum term 1 next 10 0)))
+
+
+
+
+
+
+
 
 
 
