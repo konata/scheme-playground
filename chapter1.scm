@@ -113,10 +113,6 @@
   (define (fib-iter a b count)
     (if (= count 0) b (fib-iter (+ a b) a (- count 1))))
   (fib-iter 1 0 n))
-
-
-
-
  
 (define (money-change amount)
   (cc amount 5))
@@ -164,21 +160,4 @@
 (p (fib1 100))
 (p (fib2 100))
 (p (money-change 100))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
