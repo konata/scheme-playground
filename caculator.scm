@@ -58,6 +58,7 @@
   ))
 
 
+;; should recursive calculate sub values
 (p (calc '(+ 1 3)))
 (p (calc '(+ 1 3 4 (* 5 7) (- 10 5) (/ 10 2))))
 
