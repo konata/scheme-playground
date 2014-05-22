@@ -102,13 +102,37 @@
     (define (f x)
       (- (* x x x) (* x x ) 1.2))
 
-
     (define (pi x)
       (sin x)
       )
 
     (p (search pi 2.0 4.0))
    )
+
+  ;;fixed-point
+  (begin 
+    (define tolerance 0.0001)
+
+    (define (close x y)
+      (< (abs (- x y)) tolerance))
+
+    (define (fixed-point f guess)
+      (let ((next (f guess)))
+        (if (close guess next) next (fixed-point f next))))
+    
+    (p (fixed-point cos 1.0))
+    (p (fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0))
+
+    (define (avg x y) (/ (+ x y) 2))
+
+    (define (sqrt x)
+      (fixed-point (lambda (y) (avg y (/ x y))) 1.0))
+    
+    (p (sqrt 3))
+    
+    )
+
+
   
   
 
