@@ -71,20 +71,46 @@
   ;; ((lambda (a b) (body)) x y)
 
 
-;; Q1.34
-(begin
-    (define (f g)
-     (g 2))
-    (p (f square))
-    (p (f (lambda (x) (* x (+ 1 x)))))
-    (p (f f))
-)
+  ;; Q1.34
+  (begin
+      (define (f g)
+       (g 2))
+      (p (f square))
+      (p (f (lambda (x) (* x (+ 1 x)))))
+      ;(p (f f))
+  )
 
 
+  (begin
+    (define (close x y)
+      (< (abs (- x y)) 0.000000000001))
+  
+    (define (avg x y)
+      (/ (+ x y) 2))
+  
+    (define (search f pos neg)
+      (let ((mid (avg pos neg)))
+        (cond
+          ((close pos neg) mid)
+          (else (let ((mid-value (f mid)))
+                  (cond 
+                    ((= 0 mid-value) mid)
+                    ((< 0 mid-value) (search f mid neg))
+                    (else (search f pos mid))
+                    ))))))
+    
+    (define (f x)
+      (- (* x x x) (* x x ) 1.2))
 
 
+    (define (pi x)
+      (sin x)
+      )
 
-
+    (p (search pi 2.0 4.0))
+   )
+  
+  
 
 
 
