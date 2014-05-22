@@ -32,16 +32,53 @@
   
   (p (accumulate + 0 (lambda (x) (* x x)) 1 (lambda (x) (+ x 1)) 3 >))
 
-  ;;Q 1.33
+  ;; Q 1.33
   (define (filter combiner null-value term cur next end predication greater)
     (cond 
       ((greater cur next) null-value)
       ((predication cur) (combiner (term cur) (filter combiner null-value term (next cur) next end predication greater)))
       (else (filter combiner null-value term (next cur) next end predication greater))))
 
+  ;; using inner helper
+  (define (f x y)
+    (define (f-helper a b)
+      (+ (* x (square a)))
+        (* y b)
+        (* a b))
+    (f-helper (+ 1 (* x y))
+                (- 1 y)))
 
-  
+  ;; using lambda
+  (define (f x y)
+    ((lambda (a b)
+       (+ (* x (square a))
+          (* y b)
+          (* a b)))
+       (+ 1 (* x y))
+       (- 1 y)))
+
+  ;; using let
+  (define (f x y)
+    (let ((a (+ 1 (* x y))) 
+      (b (- 1 y)))
+      (+ (* x (square a))
+         (* y b)
+         (* a b))))
   )
+
+  ;; (let ((a x) (b y))  (body))
+  ;; == 
+  ;; ((lambda (a b) (body)) x y)
+
+
+;; Q1.34
+(begin
+    (define (f g)
+     (g 2))
+    (p (f square))
+    (p (f (lambda (x) (* x (+ 1 x)))))
+    (p (f f))
+)
 
 
 
