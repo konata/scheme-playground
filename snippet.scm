@@ -40,8 +40,6 @@
       (else (filter combiner null-value term (next cur) next end predication greater))))
 
 
-
-
   
   )
 
