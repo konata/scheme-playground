@@ -128,13 +128,19 @@
     (p (sum term 1 next 10 0)))
 
 
+;; Q1.31
+(begin
+  (define (next n)
+    (+ 2 n))
 
+  (define (term n)
+    (/ (* (- n 1) (+ n 1)) (* n n)))
 
+  (define (product term a next b result)
+    (if (> a b) (* 4 result)
+      (product term (next a) next b (* result (term a)))))
 
-
-
-
-
+  (p (product term 3.0 next 100001.0 1.0)))
 
 
 
