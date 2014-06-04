@@ -88,4 +88,20 @@
 
 (mulLR 'new 'is 'nice lat col)
 
+;; begin even? without collector
+(define (even lat)
+  (cond
+    ((null? lat) '())
+    (else (let ((header (car lat)) (tail (cdr lat)))
+                (cond
+                  ((and (atom? header) (even? header)) (cons header (even tail)))
+                  ((atom? header) (even tail))
+                  (else (cons (even header)  (even tail))))))))
+  
+(define even-list '(1 2 3 (2 3 4 (7 8 9 4)) 5 6 7 8 9 10))
+(p (even even-list))
+  
+
+
+  
 
