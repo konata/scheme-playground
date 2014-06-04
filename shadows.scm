@@ -69,11 +69,23 @@
 
 ;; refactor using collector 
 
+(define (mulLR new oldL oldR lat col)
+  (cond
+    ((null? lat) (col '() 0 0))
+    (else (let ((header (car lat)) (tail (cdr lat)))
+                (cond 
+                  ((eq? header oldL) (mulLR new oldL oldR (cdr lat) 
+                      (lambda (newlat L R) (col (cons new (cons oldL newlat)) (+ 1 L) R)
+                      )))
+                  ((eq? header oldR) (mulLR new oldL oldR (cdr lat) 
+                      (lambda (newlat L R) (col (cons oldR (cons new newlat)) L (+ 1 R))
+                      )))
+                  (else (mulLR new oldL oldR tail 
+                      (lambda (newlat L R) (col (cons header newlat) L R))
+                      )))))))
 
+(define (col lat L R) (p lat) (p L) (p R))
 
-
-
-
-
+(mulLR 'new 'is 'nice lat col)
 
 
