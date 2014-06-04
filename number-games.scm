@@ -41,3 +41,8 @@
 ;; condition
 ;; when using cdr, termination is null?
 ;; when sub1, termination is zero?
+
+
+
+
+
