@@ -100,8 +100,45 @@
   
 (define even-list '(1 2 3 (2 3 4 (7 8 9 4)) 5 6 7 8 9 10))
 (p (even even-list))
+
+
+;; begin even with collector
+;(define (evens lat col)
+;  (cons 
+;    ((null? lat) (col 0 1)
+;    (else (let ((header (car lat))(tail (cdr lat)))
+;            (cond
+;              ((and (atom? header) (even? header)) 
+;               (evens (cdr lat) 
+;                (lambda (add mul) (col (+ header add) mul))))
+;              ((atom? header) 
+;               (evens (cdr lat))
+;                (lambda (add mul) (col add (* mul header))))
+;              (else
+;                evens ??????
+;                )
+;            ))
+;    ))
+;
+;
+;(define (even-col even-add odd-mul)
+;  (p "even-add" even-add)
+;  (p "odd-mul" odd-mul))
+;
   
 
 
   
+
+
+
+
+
+
+
+
+
+
+
+
 
