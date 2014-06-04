@@ -124,7 +124,53 @@
 ;(define (even-col even-add odd-mul)
 ;  (p "even-add" even-add)
 ;  (p "odd-mul" odd-mul))
-;
+
+
+(define (eternity x)
+  (eternity x))
+
+;; when f apply for '()
+;; taken will-stop? return false will-stop? should return true
+;; taken will-stop? return true will-stop? should return false
+(define (will-stop? f)
+  ...
+  )
+
+(define (last-try x)
+  (and (will-stop? last-try) (eternity x)))
+
+(will-stop? last-try)
+
+;; y-combinator
+(define (length l)
+  (cond 
+    ((null? l ) 0)
+    (else (+ 1 (length (cdr l)))
+
+;; length0
+(lambda (l)
+  (cond
+     ((null? l) 0)
+     (else (add1 (eternity (cdr l))))))
+
+;; length1
+(lambda(l)
+  (cond
+    ((null? l) 0)
+    (else (add1 (
+                 (lambda (length0) 
+                   (cond 
+                     ((null? length0) 0)
+                     (else (eternity (cdr length0)))
+                     )) 
+                 (cdr l)
+                )))))
+
+
+
+
+
+
   
 
 
